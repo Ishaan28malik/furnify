@@ -6,6 +6,7 @@ import {
   requestCategoryFailed,
   requestCategories,
   requestCategory,
+  requestCategoryDetailSuccess,
 } from './slices/categorySlice';
 import {
   requestProductSuccess,
@@ -15,17 +16,22 @@ import {
   requestProduct,
 } from './slices/productSlice';
 
-function* getAllProducts(): Generator {
+function* getAllProducts() {
   try {
-    const products = yield call(shop.getProducts);
+    const products: ReturnType<typeof shop.getProducts> = yield call(
+      shop.getProducts,
+    );
     yield put(requestProductSuccess(products));
   } catch (e) {
     yield put(requestProductFailed());
   }
 }
 
-function* getSpecificProduct(action: PayloadAction<number>): Generator {
-  const product = yield call(shop.getProduct, action.payload);
+function* getSpecificProduct(action: PayloadAction<any>) {
+  const product: ReturnType<typeof shop.getProduct> = yield call(
+    shop.getProduct,
+    action.payload,
+  );
   if (product !== undefined) {
     yield put(requestProductDetailSuccess(product));
   } else {
@@ -33,19 +39,24 @@ function* getSpecificProduct(action: PayloadAction<number>): Generator {
   }
 }
 
-function* getAllCategories(): Generator {
+function* getAllCategories() {
   try {
-    const categories = yield call(shop.getCategories);
+    const categories: ReturnType<typeof shop.getCategories> = yield call(
+      shop.getCategories,
+    );
     yield put(requestCategoriesSuccess(categories));
   } catch (e) {
     yield put(requestCategoryFailed());
   }
 }
 
-function* getSpecificCategory(action: PayloadAction<number>): Generator {
-  const category = yield call(shop.getCategory, action.payload);
-  if (category !== undefined) {
-    yield put(requestCategoriesSuccess(category));
+function* getSpecificCategory(action: PayloadAction<any>) {
+  const category: ReturnType<typeof shop.getCategory> = yield call(
+    shop.getCategory,
+    action.payload,
+  );
+  if (category) {
+    yield put(requestCategoryDetailSuccess(category));
   } else {
     yield put(requestCategoryFailed());
   }
