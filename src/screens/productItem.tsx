@@ -10,7 +10,7 @@ const ProductItem = ({ item }: itemProps) => {
     const navigation = useNavigation();
 
     const getProducts = (item) => {
-        console.log("currect item", item)
+        // console.log("currect item", item)
         navigation.navigate('Product', {'product': item});
     }
 
@@ -22,6 +22,7 @@ const ProductItem = ({ item }: itemProps) => {
                     <Image style={styles.prdImg} source={{ uri: `${item.thumbnail}`}} />
                 </View>
                 <Text>{item.title}</Text>
+                <Text>₹{item.price}</Text>
             </TouchableOpacity>
         </View>
     )

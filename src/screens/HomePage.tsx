@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import SearchInput from "../components/CustomSearch";
+import CustomButton from "../components/CustomButton";
 
 export const categoryData = [
     { title: 'Sofas', imageUrl: 'https://www.ikea.com/global/assets/range-categorisation/images/product/furniture-fu001.jpeg' },
@@ -13,10 +14,15 @@ export const categoryData = [
 const HomePage = ({}) => {
 
     const navigation = useNavigation();
+    const [searchText, setSearch] = useState("");
 
-    const getSearchData = (value: string) => {
-        console.log("search data", value)
-        navigation.navigate('Products', {searchQuery: value});
+    // const getSearchData = (value: string) => {
+    //     console.log("search data", value)
+        
+    // }
+
+    const onSearch = () => {
+        navigation.navigate('Products', {searchQuery: searchText});
     }
 
     return (
@@ -24,7 +30,8 @@ const HomePage = ({}) => {
              <Text style={styles.subHeader}>Explore What</Text>
             <Text style={styles.subHeader}>Your Home Needs</Text>
             <View>
-                <SearchInput updateSearch={getSearchData}/>
+                <SearchInput updateSearch={(searchText) => setSearch(searchText)}/>
+                {searchText && <CustomButton title="Search" onPress={onSearch} backgroundColor="black" />}
             </View>
             <View>
                 <Text style={styles.categoryHeading}>Categories</Text>

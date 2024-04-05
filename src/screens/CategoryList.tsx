@@ -24,7 +24,7 @@ const Category = () => {
         dispatch(requestCategories());
     }, [])
 
-    console.log("categories", categories);
+    // console.log("categories", categories);
 
     const handleCategory = (category:CategoryType) => {
         navigation.navigate('Products' as never);
