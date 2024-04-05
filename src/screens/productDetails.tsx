@@ -2,9 +2,14 @@
 
 
 
-import { Text, Image, View, StyleSheet } from "react-native"
+import { Text, Image, View, StyleSheet, TouchableOpacity } from "react-native"
 import CustomButton from "../components/CustomButton"
 import { useRoute } from "@react-navigation/native"
+
+import { useAppDispatch } from "../hooks/useAppDispatch"
+import { useAppSelector } from "../hooks/useAppSelector"
+import { updateQuantity, addToCart } from "../store/slices/cartSlice"
+import { useEffect } from "react"
 
 type productProps = {
     navigation: any
@@ -12,16 +17,49 @@ type productProps = {
 
 const ProductDetail = ({ navigation }: productProps) => {
 
+    const dispatch = useAppDispatch();
+
+    const { items } = useAppSelector(state => state.cart);
+
     const { params } = useRoute();
     const product = params?.product;
 
     // const [cart, setCart] = useState([]);
 
     const onAddtoCart = () => {
-        console.log("onAddtoCart")
+        console.log("onAddtoCart", product);
+        let updatePrd;
+        let prd = findProduct();
+        if(prd?.quantity) {
+            dispatch(updateQuantity({productID: prd.id, quantity: prd.quantity + 1}));
+            console.log("find prd", findProduct);
+        } else {
+            updatePrd = {
+                ...product,
+                'quantity': 1,
+                'totalPrice': product.price
+            }
+            dispatch(addToCart(updatePrd));
+        }
     }
 
-    // console.log("params product", product);
+
+    const findProduct = () => {
+        let prd = items.find(prd => (prd.id === product.id))
+        return  prd ? prd : product
+    }
+
+    const addQuantity = () => {
+        let prd = findProduct();
+        dispatch(updateQuantity({productID: prd.id, quantity: prd.quantity + 1}));
+    }
+
+    const decreaseQuantity = () => {
+        let prd = findProduct();
+        dispatch(updateQuantity({productID: prd.id, quantity: prd.quantity - 1}));
+    }
+
+    console.log("===items=====", items, findProduct());
 
     return(
         <View style={styles.container}>
@@ -35,9 +73,17 @@ const ProductDetail = ({ navigation }: productProps) => {
                         <Text style={styles.text}>{product.title}</Text>
                         <Text style={styles.priceStyle}>₹{product.price}</Text>
                     </View>
-                    <View style={styles.cartInfo}>
-                        <Text>cart</Text>
-                    </View>
+                    {findProduct()?.quantity &&
+                        <View style={styles.cartInfo}>
+                            <TouchableOpacity onPress={addQuantity}>
+                                <Text>+</Text>
+                            </TouchableOpacity>
+                            <Text>{findProduct()?.quantity}</Text>
+                            <TouchableOpacity onPress={decreaseQuantity}>
+                                <Text>-</Text>
+                            </TouchableOpacity>
+                        </View>
+                    }
                 </View>
                 <View>
                     <Text style={styles.descStyle}>{product.description}</Text>

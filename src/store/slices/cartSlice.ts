@@ -40,6 +40,7 @@ const cartSlice = createSlice({
           item.totalPrice = action.payload.quantity * item.price;
         }
       });
+      console.log("store state", state);
     },
     updateTotalPrice: state => {
       state.grandTotal = state.items.reduce((acc, item) => {
