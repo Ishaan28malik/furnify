@@ -1,8 +1,10 @@
 import { useState } from "react"
-import { Image, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import SearchInput from "../components/CustomSearch";
+import CustomButton from "../components/CustomButton";
 
-const categoryData = [
+export const categoryData = [
     { title: 'Sofas', imageUrl: 'https://www.ikea.com/global/assets/range-categorisation/images/product/furniture-fu001.jpeg' },
     { title: 'Chairs', imageUrl: 'https://www.ikea.com/in/en/images/products/nisse-folding-chair-black__0728163_pe736118_s5.jpg' },
     { title: 'Tables', imageUrl: 'https://www.ikea.com/in/en/images/products/sandsberg-table-black__1074348_pe856162_s5.jpg' },
@@ -10,37 +12,45 @@ const categoryData = [
 ];
 
 const HomePage = ({}) => {
+
     const navigation = useNavigation();
-    const [query, setQuery] = useState('');
+    const [searchText, setSearch] = useState("");
+
+    // const getSearchData = (value: string) => {
+    //     console.log("search data", value)
+        
+    // }
+
+    const onSearch = () => {
+        navigation.navigate('Products', {searchQuery: searchText});
+    }
 
     return (
         <ScrollView style={styles.container}>
-        {/* <Text style={styles.header}>Furnify</Text> */}
-        <Text style={styles.subHeader}>Explore What</Text>
-        <Text style={styles.subHeader}>Your Home Needs</Text>
-        <TextInput />
-        <View >
-            <TextInput
-                style={styles.input}
-                placeholder="Search"
-                value={query}
-                onChangeText={setQuery}
-                // onSubmitEditing is called when the user submits the keyboard (e.g., pressing "search" or "enter")
-                // onSubmitEditing={() => onSearch(query)}
-            />
-            {/* <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText}>Search</Text>
-            </TouchableOpacity> */}
-        </View>
-        <Text style={styles.categoryHeading}>Categories</Text>
-        <ScrollView horizontal={true} style={styles.categoryList}>
-            {categoryData.map((category, index) => (
-                <View key={index} style={styles.categoryItem}>
-                    <Text>{category.title}</Text>
-                    <Image style={styles.categoryImage} source={{ uri: category.imageUrl }} />
-                </View>
-            ))}
-        </ScrollView>
+             <Text style={styles.subHeader}>Explore What</Text>
+            <Text style={styles.subHeader}>Your Home Needs</Text>
+            <View>
+                <SearchInput updateSearch={(searchText) => setSearch(searchText)}/>
+                {searchText && <CustomButton title="Search" onPress={onSearch} backgroundColor="black" />}
+            </View>
+            <View>
+                <Text style={styles.categoryHeading}>Categories</Text>
+                <TouchableOpacity onPress={() => navigation.navigate('Category' as never)}>
+                    <Text>See all</Text>
+                </TouchableOpacity>
+            </View>
+            <ScrollView horizontal={true} style={styles.categoryList}>
+                {categoryData.map((category, index) => (
+                    <TouchableOpacity key={index} style={styles.categoryItem} onPress={() => navigation.navigate('Products' as never)}>
+                        <Image style={styles.categoryImage} source={{ uri: category.imageUrl }} />
+                        <Text>{category.title}</Text>
+                    </TouchableOpacity>
+                ))}
+            </ScrollView>
+            <Image
+                style={styles.footerImage}
+                source={{ uri: 'footer_image_url' }}
+                />
         <Image
             style={styles.footerImage}
             source={{ uri: 'footer_image_url' }}
