@@ -21,8 +21,8 @@ const HomePage = ({}) => {
 
     return (
         <ScrollView style={styles.container}>
-            <Text style={styles.header}>Furnify</Text>
-            <TextInput />
+             <Text style={styles.subHeader}>Explore What</Text>
+            <Text style={styles.subHeader}>Your Home Needs</Text>
             <View>
                 <SearchInput updateSearch={getSearchData}/>
             </View>
@@ -43,21 +43,30 @@ const HomePage = ({}) => {
             <Image
                 style={styles.footerImage}
                 source={{ uri: 'footer_image_url' }}
-            />
-        </ScrollView>
+                />
+        <Image
+            style={styles.footerImage}
+            source={{ uri: 'footer_image_url' }}
+        />
+    </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 10,
+        padding: 25,
+        backgroundColor: 'white'
     },
     header: {
         fontSize: 24,
         fontWeight: 'bold',
         textAlign: 'center',
         marginVertical: 10,
+    },
+    subHeader: {
+        fontSize: 16,
+        fontWeight: 'bold',
     },
     categoryHeading: {
         fontSize: 20,
@@ -71,15 +80,24 @@ const styles = StyleSheet.create({
     categoryItem: {
         marginRight: 20,
         alignItems: 'center',
+        display: 'flex',
+        flexDirection: 'row',
+        borderWidth: 1,
+        borderRadius: 20,
+        paddingLeft: 15,
+        paddingRight: 15,
+        paddingTop: 10,
+        paddingBottom: 10
     },
     categoryImage: {
-        width: 100,
-        height: 100,
+        width: 50,
+        height: 50,
         marginBottom: 5,
+        marginLeft: 20
     },
     footerImage: {
         width: '100%',
-        height: 150,
+        height: 150, // Adjust as needed
         marginTop: 20,
     },
     input: {

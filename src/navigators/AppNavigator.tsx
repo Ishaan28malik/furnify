@@ -22,7 +22,7 @@ const AppNavigator = () => {
           <Stack.Screen name="Product" component={ProductDetail}/>
       </Stack.Navigator>
     </NavigationContainer>
-  )
-}
+  );
+};
 
-export default AppNavigator
+export default AppNavigator;

@@ -4,17 +4,38 @@ import {TouchableOpacity, Image, Text, StyleSheet, View} from "react-native";
 
 import { categoryData } from "./HomePage";
 import { useNavigation } from "@react-navigation/native";
+import { requestCategories, requestCategory } from "../store/slices/categorySlice";
+import { useAppDispatch } from "../hooks/useAppDispatch";
+import { useAppSelector } from "../hooks/useAppSelector";
+import { useEffect } from "react";
+
+import { CategoryType } from "../api/shop";
 
 const Category = () => {
+    const dispatch = useAppDispatch();
     
     const navigation = useNavigation();
 
+    const { categories } = useAppSelector(state => state.category);
+    
+    useEffect(() => {
+        dispatch(requestCategories());
+    }, [])
+
+    console.log("categories", categories);
+
+    const handleCategory = (category:CategoryType) => {
+        navigation.navigate('Products' as never);
+        console.log("category", category);
+        dispatch(requestCategory(category));
+    }
+
     return(
         <View>
-            {categoryData.map((category, index) => (
-                <TouchableOpacity key={index} style={styles.categoryItem} onPress={() => navigation.navigate('Products' as never)}>
+            {categories.map((category, index) => (
+                <TouchableOpacity key={index} style={styles.categoryItem} onPress={() => handleCategory(category)}>
                     <Image style={styles.categoryImage} source={{ uri: category.imageUrl }} />
-                    <Text>{category.title}</Text>
+                    <Text>{category.name}</Text>
                 </TouchableOpacity>
             ))}
         </View>

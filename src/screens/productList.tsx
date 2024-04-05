@@ -5,6 +5,7 @@ import { Text, Image, View, StyleSheet } from "react-native"
 
 import ProductItem from "./productItem";
 import List from "../components/CustomList";
+import { useAppSelector } from "../hooks/useAppSelector";
 
 type productListProps = {
     navigation: any
@@ -12,7 +13,11 @@ type productListProps = {
 
 const ProductList = ({ navigation }: productListProps) => {
 
+    const { categoryDetail } = useAppSelector(state => state.category);
+
     const [products, setProducts] = useState([]);
+
+    console.log("categoryDetail", categoryDetail);
 
     useEffect(() => {
         fetchProducts();
@@ -28,7 +33,7 @@ const ProductList = ({ navigation }: productListProps) => {
         }
       };
   
-      console.log("products in render", products);
+      // console.log("products in render", products);
 
     return(
         <View style={styles.container}>

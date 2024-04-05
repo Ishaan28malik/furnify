@@ -1,5 +1,4 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
-import chatSlice from './chatSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   FLUSH,
@@ -11,15 +10,22 @@ import {
   persistReducer,
   persistStore,
 } from 'redux-persist';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './saga';
+import productSlice from './slices/productSlice';
+import categorySlice from './slices/categorySlice';
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  // whitelist: ['groups'],
 };
 
+// create the saga middleware
+const sagaMiddleware = createSagaMiddleware();
+
 const rootReducer = combineReducers({
-  chat: chatSlice,
+  product: productSlice,
+  category: categorySlice,
 });
 
 const store = configureStore({
@@ -30,8 +36,10 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(sagaMiddleware),
 });
+
+sagaMiddleware.run(rootSaga);
 
 const persistor = persistStore(store);
 export {persistor, store};
