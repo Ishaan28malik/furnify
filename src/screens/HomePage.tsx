@@ -15,48 +15,55 @@ const HomePage = ({}) => {
 
     return (
         <ScrollView style={styles.container}>
-            <Text style={styles.header}>Furnify</Text>
-            <TextInput />
-            <View >
-                <TextInput
-                    style={styles.input}
-                    placeholder="Search"
-                    value={query}
-                    onChangeText={setQuery}
-                    // onSubmitEditing is called when the user submits the keyboard (e.g., pressing "search" or "enter")
-                    // onSubmitEditing={() => onSearch(query)}
-                />
-                {/* <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>Search</Text>
-                </TouchableOpacity> */}
-            </View>
-            <Text style={styles.categoryHeading}>Categories</Text>
-            <ScrollView horizontal={true} style={styles.categoryList}>
-                {categoryData.map((category, index) => (
-                    <View key={index} style={styles.categoryItem}>
-                        <Image style={styles.categoryImage} source={{ uri: category.imageUrl }} />
-                        <Text>{category.title}</Text>
-                    </View>
-                ))}
-            </ScrollView>
-            <Image
-                style={styles.footerImage}
-                source={{ uri: 'footer_image_url' }}
+        {/* <Text style={styles.header}>Furnify</Text> */}
+        <Text style={styles.subHeader}>Explore What</Text>
+        <Text style={styles.subHeader}>Your Home Needs</Text>
+        <TextInput />
+        <View >
+            <TextInput
+                style={styles.input}
+                placeholder="Search"
+                value={query}
+                onChangeText={setQuery}
+                // onSubmitEditing is called when the user submits the keyboard (e.g., pressing "search" or "enter")
+                // onSubmitEditing={() => onSearch(query)}
             />
+            {/* <TouchableOpacity style={styles.button}>
+                <Text style={styles.buttonText}>Search</Text>
+            </TouchableOpacity> */}
+        </View>
+        <Text style={styles.categoryHeading}>Categories</Text>
+        <ScrollView horizontal={true} style={styles.categoryList}>
+            {categoryData.map((category, index) => (
+                <View key={index} style={styles.categoryItem}>
+                    <Text>{category.title}</Text>
+                    <Image style={styles.categoryImage} source={{ uri: category.imageUrl }} />
+                </View>
+            ))}
         </ScrollView>
+        <Image
+            style={styles.footerImage}
+            source={{ uri: 'footer_image_url' }}
+        />
+    </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 10,
+        padding: 25,
+        backgroundColor: 'white'
     },
     header: {
         fontSize: 24,
         fontWeight: 'bold',
         textAlign: 'center',
         marginVertical: 10,
+    },
+    subHeader: {
+        fontSize: 16,
+        fontWeight: 'bold',
     },
     categoryHeading: {
         fontSize: 20,
@@ -70,15 +77,24 @@ const styles = StyleSheet.create({
     categoryItem: {
         marginRight: 20,
         alignItems: 'center',
+        display: 'flex',
+        flexDirection: 'row',
+        borderWidth: 1,
+        borderRadius: 20,
+        paddingLeft: 15,
+        paddingRight: 15,
+        paddingTop: 10,
+        paddingBottom: 10
     },
     categoryImage: {
-        width: 100,
-        height: 100,
+        width: 50,
+        height: 50,
         marginBottom: 5,
+        marginLeft: 20
     },
     footerImage: {
         width: '100%',
-        height: 150,
+        height: 150, // Adjust as needed
         marginTop: 20,
     },
     input: {
