@@ -15,7 +15,7 @@ const initialState: initialState = {
   productDetail: null,
 };
 
-export const productSlice = createSlice({
+const productSlice = createSlice({
   name: 'Products',
   initialState,
   reducers: {

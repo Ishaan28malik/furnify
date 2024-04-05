@@ -14,15 +14,18 @@ import createSagaMiddleware from 'redux-saga';
 import rootSaga from './saga';
 import productSlice from './slices/productSlice';
 import categorySlice from './slices/categorySlice';
+import cartSlice from './slices/cartSlice';
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
+  whiteList: ['cart'],
 };
 
 const rootReducer = combineReducers({
   product: productSlice,
   category: categorySlice,
+  cart: cartSlice,
 });
 
 const makeStore = () => {
