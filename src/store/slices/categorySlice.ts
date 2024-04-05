@@ -10,7 +10,7 @@ interface initialState {
 
 const initialState: initialState = {
   categories: [],
-  categoryDetail: {"id": 1, "name": "Sofas"},
+  categoryDetail: null,
   loading: false,
   error: null,
 };
@@ -33,7 +33,7 @@ const categorySlice = createSlice({
       state.loading = false;
       state.error = 'Failed to fetch Category';
     },
-    requestCategory: (state, action) => {
+    requestCategory: state => {
       state.loading = true;
     },
     requestCategoryDetailSuccess: (
