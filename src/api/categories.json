@@ -1,10 +1,18 @@
 [
   {
     "id": 1,
-    "name": "Chairs"
+    "name": "Sofas"
   },
   {
     "id": 2,
-    "name": "tables"
+    "name": "Tables"
+  },
+  {
+    "id": 3,
+    "name": "Cupboards"
+  },
+  {
+    "id": 4,
+    "name": "Chairs"
   }
 ]
