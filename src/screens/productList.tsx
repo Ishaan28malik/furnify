@@ -1,11 +1,12 @@
 
 
 import { useEffect, useState } from "react";
-import { Text, Image, View, StyleSheet } from "react-native"
+import { Text, Image, View, StyleSheet, ScrollView } from "react-native"
 
 import ProductItem from "./productItem";
 import List from "../components/CustomList";
 import { useAppSelector } from "../hooks/useAppSelector";
+import { useRoute } from "@react-navigation/native";
 
 type productListProps = {
     navigation: any
@@ -14,38 +15,27 @@ type productListProps = {
 const ProductList = ({ navigation }: productListProps) => {
 
     const { categoryDetail } = useAppSelector(state => state.category);
+    const { products } = useAppSelector(state => state.product)
+    const params = useRoute();
 
-    const [products, setProducts] = useState([]);
+    // const [products, setProducts] = useState([]);
+    // const params = 
 
-    console.log("categoryDetail", categoryDetail);
-
-    useEffect(() => {
-        fetchProducts();
-      }, []);
-
-      const fetchProducts = async () => {
-        try {
-          const response = await fetch('https://dummyjson.com/products/category/furniture');
-          const data = await response.json();
-          setProducts(data);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-  
-      // console.log("products in render", products);
+    // console.log("categoryDetail", categoryDetail, products, params);
 
     return(
         <View style={styles.container}>
             <Text>Category</Text>
+                <ScrollView>
             <View style={styles.productListWrapper}>
-                {products?.products?.map((product, index) => {
+                {products?.map((product, index) => {
                     return (
                       <ProductItem item={product} />
                     )
                 })}
                 {/* <List data={products['products']} Item={ProductItem} navigation={navigation} /> */}
             </View>
+                </ScrollView>
         </View>
     )
 }
@@ -59,7 +49,8 @@ const styles = StyleSheet.create({
       flexWrap: 'wrap',
       flexDirection: 'row',
       gap: 20,
-      padding: 10
+      padding: 10,
+      justifyContent: 'center'
     }
 })
 

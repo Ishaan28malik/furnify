@@ -16,7 +16,7 @@ const HomePage = ({}) => {
 
     const getSearchData = (value: string) => {
         console.log("search data", value)
-
+        navigation.navigate('Products', {searchQuery: value});
     }
 
     return (

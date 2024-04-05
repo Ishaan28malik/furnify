@@ -9,6 +9,8 @@ import { useAppDispatch } from "../hooks/useAppDispatch";
 import { useAppSelector } from "../hooks/useAppSelector";
 import { useEffect } from "react";
 
+import { requestProducts } from "../store/slices/productSlice";
+
 import { CategoryType } from "../api/shop";
 
 const Category = () => {
@@ -28,6 +30,7 @@ const Category = () => {
         navigation.navigate('Products' as never);
         console.log("category", category);
         dispatch(requestCategory(category));
+        dispatch(requestProducts());
     }
 
     return(

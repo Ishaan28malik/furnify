@@ -9,12 +9,19 @@ const ProductItem = ({ item }: itemProps) => {
 
     const navigation = useNavigation();
 
-    console.log("item new", item);
+    const getProducts = (item) => {
+        console.log("currect item", item)
+        navigation.navigate('Product', {'product': item});
+    }
+
+    // console.log("item new", item);
     return(
         <View>
-            <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Product' as never)}>
+            <TouchableOpacity style={styles.container} onPress={() => getProducts(item)}>
+                <View style={styles.imgContainer}>
+                    <Image style={styles.prdImg} source={{ uri: `${item.thumbnail}`}} />
+                </View>
                 <Text>{item.title}</Text>
-                <Image source={{ uri: `${item.thumbnail}`}} />
             </TouchableOpacity>
         </View>
     )
@@ -28,8 +35,19 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "lightgray",
         padding: 20,
-        width: 150,
-        height: 150
+        // width: 160,
+        // height: 150,
+        gap: 20,
+        alignItems: 'center',
+    },
+    imgContainer: {
+        backgroundColor: 'lightgray',
+        height: 100,
+        width: 100
+    },
+    prdImg: {
+        width: "100%",
+        height: '100%'
     }
 })
 
