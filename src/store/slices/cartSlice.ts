@@ -3,11 +3,12 @@ import {ProductType} from '../../api/shop';
 
 interface CartItemType extends ProductType {
   quantity: number;
+  totalPrice: number;
 }
 
 interface initialStateType {
   items: CartItemType[];
-  totalPrice: number;
+  grandTotal: number;
   taxAmount: number;
 }
 
@@ -15,19 +16,19 @@ const TAX_PERCENTAGE = 2;
 
 const initialState: initialStateType = {
   items: [],
-  totalPrice: 0,
+  grandTotal: 0,
   taxAmount: 0,
 };
 
-export const cartSlice = createSlice({
+const cartSlice = createSlice({
   name: 'Cart',
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<CartItemType>) => {
       state.items.push(action.payload);
     },
-    removeFromCart: (state, action: PayloadAction<CartItemType>) => {
-      state.items = state.items.filter(item => action.payload.id !== item.id);
+    removeItemFromCart: (state, action: PayloadAction<number>) => {
+      state.items = state.items.filter(item => action.payload !== item.id);
     },
     updateQuantity: (
       state,
@@ -36,20 +37,30 @@ export const cartSlice = createSlice({
       state.items.forEach(item => {
         if (item.id === action.payload.productID) {
           item.quantity = action.payload.quantity;
+          item.totalPrice = action.payload.quantity * item.price;
         }
       });
     },
     updateTotalPrice: state => {
-      state.totalPrice = state.items.reduce((acc, item) => {
+      state.grandTotal = state.items.reduce((acc, item) => {
         return (acc += item.price);
       }, 0);
-
-      state.taxAmount = state.totalPrice * (TAX_PERCENTAGE / 100);
+      state.taxAmount = state.grandTotal * (TAX_PERCENTAGE / 100);
     },
     clearCart: state => {
       state.items = [];
-      state.totalPrice = 0;
+      state.grandTotal = 0;
       state.taxAmount = 0;
     },
   },
 });
+
+export const {
+  addToCart,
+  clearCart,
+  removeItemFromCart,
+  updateQuantity,
+  updateTotalPrice,
+} = cartSlice.actions;
+
+export default cartSlice.reducer;
