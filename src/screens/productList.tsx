@@ -25,11 +25,10 @@ const ProductList = ({ navigation }: productListProps) => {
     // const params = 
 
     useEffect(() => {
-      console.log("products", products);
       let updatedPrds = products.filter((prd) => (prd.title.indexOf(searchQuery) >=0 ))
       setPrds(updatedPrds)
     }, [searchQuery])
-    console.log("=======categoryDetail", categoryDetail, searchQuery, updatedPrds);
+    console.log("=======categoryDetail", categoryDetail);
 
     return(
         <View style={styles.container}>

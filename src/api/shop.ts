@@ -1,5 +1,5 @@
-import _products from './products.json';
-import _categories from './categories.json';
+import PRODUCTS from './products.json';
+import CATEGORIES from './categories.json';
 
 export type ProductType = {
   id: number;
@@ -16,11 +16,12 @@ export type CategoryType = {
 };
 
 export default {
-  getProducts: (): ProductType[] => _products,
+  getProducts: (): ProductType[] => PRODUCTS,
   getProduct: (productID: number): ProductType | undefined =>
-    _products.find(product => product.id === productID),
+    PRODUCTS.find(product => product.id === productID),
 
-  getCategories: () => _categories,
-  getCategory: (categoryID: number): CategoryType | undefined =>
-    _categories.find(cat => cat.id === categoryID),
+  getCategories: () => CATEGORIES,
+  getCategory: (categoryID: number): CategoryType | undefined => {
+    return CATEGORIES.find(cat => cat.id === categoryID);
+  },
 };

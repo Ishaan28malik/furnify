@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {CategoryType} from '../../api/shop';
 
 interface initialState {
@@ -22,7 +22,10 @@ export const categorySlice = createSlice({
     requestCategories: state => {
       state.loading = true;
     },
-    requestCategoriesSuccess: (state, action) => {
+    requestCategoriesSuccess: (
+      state,
+      action: PayloadAction<CategoryType[]>,
+    ) => {
       state.categories = action.payload;
       state.loading = false;
     },
@@ -33,7 +36,10 @@ export const categorySlice = createSlice({
     requestCategory: (state, action) => {
       state.loading = true;
     },
-    requestCategoryDetailSuccess: (state, action) => {
+    requestCategoryDetailSuccess: (
+      state,
+      action: PayloadAction<CategoryType>,
+    ) => {
       state.categoryDetail = action.payload;
       state.loading = false;
     },

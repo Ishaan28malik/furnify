@@ -15,7 +15,7 @@ const ProductDetail = ({ navigation }: productProps) => {
     const { params } = useRoute();
     const product = params?.product;
 
-    const [cart, setCart] = useState([]);
+    // const [cart, setCart] = useState([]);
 
     const onAddtoCart = () => {
         console.log("onAddtoCart")
