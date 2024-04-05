@@ -20,29 +20,32 @@ const persistConfig = {
   storage: AsyncStorage,
 };
 
-// create the saga middleware
-const sagaMiddleware = createSagaMiddleware();
-
 const rootReducer = combineReducers({
   product: productSlice,
   category: categorySlice,
 });
 
-const store = configureStore({
-  reducer: persistReducer(persistConfig, rootReducer),
-  devTools: process.env.NODE_ENV !== 'production',
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }).concat(sagaMiddleware),
-});
+const makeStore = () => {
+  const sagaMiddleware = createSagaMiddleware();
+  const store = configureStore({
+    reducer: persistReducer(persistConfig, rootReducer),
+    devTools: process.env.NODE_ENV !== 'production',
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+        thunk: false,
+      }).concat(sagaMiddleware),
+  });
+  sagaMiddleware.run(rootSaga);
+  return store;
+};
 
-sagaMiddleware.run(rootSaga);
+const store = makeStore();
 
 const persistor = persistStore(store);
 export {persistor, store};
 
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = typeof store.dispatch;

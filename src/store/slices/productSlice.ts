@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {ProductType} from '../../api/shop';
 
 interface initialState {
@@ -22,7 +22,7 @@ export const productSlice = createSlice({
     requestProducts: state => {
       state.loading = true;
     },
-    requestProductSuccess: (state, action) => {
+    requestProductSuccess: (state, action: PayloadAction<ProductType[]>) => {
       state.products = action.payload;
       state.loading = false;
     },
@@ -33,7 +33,10 @@ export const productSlice = createSlice({
     requestProduct: state => {
       state.loading = true;
     },
-    requestProductDetailSuccess: (state, action) => {
+    requestProductDetailSuccess: (
+      state,
+      action: PayloadAction<ProductType>,
+    ) => {
       state.productDetail = action.payload;
       state.loading = false;
     },
