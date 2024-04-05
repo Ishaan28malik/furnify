@@ -1,8 +1,9 @@
 import { useState } from "react"
-import { Image, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import SearchInput from "../components/CustomSearch";
 
-const categoryData = [
+export const categoryData = [
     { title: 'Sofas', imageUrl: 'https://www.ikea.com/global/assets/range-categorisation/images/product/furniture-fu001.jpeg' },
     { title: 'Chairs', imageUrl: 'https://www.ikea.com/in/en/images/products/nisse-folding-chair-black__0728163_pe736118_s5.jpg' },
     { title: 'Tables', imageUrl: 'https://www.ikea.com/in/en/images/products/sandsberg-table-black__1074348_pe856162_s5.jpg' },
@@ -10,33 +11,33 @@ const categoryData = [
 ];
 
 const HomePage = ({}) => {
+
     const navigation = useNavigation();
-    const [query, setQuery] = useState('');
+
+    const getSearchData = (value: string) => {
+        console.log("search data", value)
+
+    }
 
     return (
         <ScrollView style={styles.container}>
             <Text style={styles.header}>Furnify</Text>
             <TextInput />
-            <View >
-                <TextInput
-                    style={styles.input}
-                    placeholder="Search"
-                    value={query}
-                    onChangeText={setQuery}
-                    // onSubmitEditing is called when the user submits the keyboard (e.g., pressing "search" or "enter")
-                    // onSubmitEditing={() => onSearch(query)}
-                />
-                {/* <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>Search</Text>
-                </TouchableOpacity> */}
+            <View>
+                <SearchInput updateSearch={getSearchData}/>
             </View>
-            <Text style={styles.categoryHeading}>Categories</Text>
+            <View>
+                <Text style={styles.categoryHeading}>Categories</Text>
+                <TouchableOpacity onPress={() => navigation.navigate('Category' as never)}>
+                    <Text>See all</Text>
+                </TouchableOpacity>
+            </View>
             <ScrollView horizontal={true} style={styles.categoryList}>
                 {categoryData.map((category, index) => (
-                    <View key={index} style={styles.categoryItem}>
+                    <TouchableOpacity key={index} style={styles.categoryItem} onPress={() => navigation.navigate('Products' as never)}>
                         <Image style={styles.categoryImage} source={{ uri: category.imageUrl }} />
                         <Text>{category.title}</Text>
-                    </View>
+                    </TouchableOpacity>
                 ))}
             </ScrollView>
             <Image
