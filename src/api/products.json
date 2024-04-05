@@ -1,0 +1,482 @@
+[
+  {
+    "id": 1,
+    "title": "Sofas Product 1",
+    "description": "A sofas that combines modern design with timeless functionality.",
+    "price": 101.1,
+    "category_id": 1,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/1/1.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Sofas Product 2",
+    "description": "A sofas that combines modern design with timeless functionality.",
+    "price": 102.2,
+    "category_id": 1,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/1/2.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Sofas Product 3",
+    "description": "A sofas that combines modern design with timeless functionality.",
+    "price": 103.3,
+    "category_id": 1,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/1/3.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Sofas Product 4",
+    "description": "A sofas that combines modern design with timeless functionality.",
+    "price": 104.4,
+    "category_id": 1,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/1/4.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Sofas Product 5",
+    "description": "A sofas that combines modern design with timeless functionality.",
+    "price": 105.5,
+    "category_id": 1,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/1/5.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Sofas Product 6",
+    "description": "A sofas that combines modern design with timeless functionality.",
+    "price": 106.6,
+    "category_id": 1,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/1/6.jpg"
+  },
+  {
+    "id": 7,
+    "title": "Sofas Product 7",
+    "description": "A sofas that combines modern design with timeless functionality.",
+    "price": 107.7,
+    "category_id": 1,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/1/7.jpg"
+  },
+  {
+    "id": 8,
+    "title": "Sofas Product 8",
+    "description": "A sofas that combines modern design with timeless functionality.",
+    "price": 108.8,
+    "category_id": 1,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/1/8.jpg"
+  },
+  {
+    "id": 9,
+    "title": "Sofas Product 9",
+    "description": "A sofas that combines modern design with timeless functionality.",
+    "price": 109.9,
+    "category_id": 1,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/1/9.jpg"
+  },
+  {
+    "id": 10,
+    "title": "Sofas Product 10",
+    "description": "A sofas that combines modern design with timeless functionality.",
+    "price": 111.0,
+    "category_id": 1,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/1/10.jpg"
+  },
+  {
+    "id": 11,
+    "title": "Sofas Product 11",
+    "description": "A sofas that combines modern design with timeless functionality.",
+    "price": 112.1,
+    "category_id": 1,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/1/11.jpg"
+  },
+  {
+    "id": 12,
+    "title": "Sofas Product 12",
+    "description": "A sofas that combines modern design with timeless functionality.",
+    "price": 113.2,
+    "category_id": 1,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/1/12.jpg"
+  },
+  {
+    "id": 13,
+    "title": "Sofas Product 13",
+    "description": "A sofas that combines modern design with timeless functionality.",
+    "price": 114.3,
+    "category_id": 1,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/1/13.jpg"
+  },
+  {
+    "id": 14,
+    "title": "Sofas Product 14",
+    "description": "A sofas that combines modern design with timeless functionality.",
+    "price": 115.4,
+    "category_id": 1,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/1/14.jpg"
+  },
+  {
+    "id": 15,
+    "title": "Sofas Product 15",
+    "description": "A sofas that combines modern design with timeless functionality.",
+    "price": 116.5,
+    "category_id": 1,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/1/15.jpg"
+  },
+  {
+    "id": 16,
+    "title": "Tables Product 1",
+    "description": "A tables that combines modern design with timeless functionality.",
+    "price": 117.6,
+    "category_id": 2,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/2/16.jpg"
+  },
+  {
+    "id": 17,
+    "title": "Tables Product 2",
+    "description": "A tables that combines modern design with timeless functionality.",
+    "price": 118.7,
+    "category_id": 2,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/2/17.jpg"
+  },
+  {
+    "id": 18,
+    "title": "Tables Product 3",
+    "description": "A tables that combines modern design with timeless functionality.",
+    "price": 119.8,
+    "category_id": 2,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/2/18.jpg"
+  },
+  {
+    "id": 19,
+    "title": "Tables Product 4",
+    "description": "A tables that combines modern design with timeless functionality.",
+    "price": 120.9,
+    "category_id": 2,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/2/19.jpg"
+  },
+  {
+    "id": 20,
+    "title": "Tables Product 5",
+    "description": "A tables that combines modern design with timeless functionality.",
+    "price": 122.0,
+    "category_id": 2,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/2/20.jpg"
+  },
+  {
+    "id": 21,
+    "title": "Tables Product 6",
+    "description": "A tables that combines modern design with timeless functionality.",
+    "price": 123.1,
+    "category_id": 2,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/2/21.jpg"
+  },
+  {
+    "id": 22,
+    "title": "Tables Product 7",
+    "description": "A tables that combines modern design with timeless functionality.",
+    "price": 124.2,
+    "category_id": 2,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/2/22.jpg"
+  },
+  {
+    "id": 23,
+    "title": "Tables Product 8",
+    "description": "A tables that combines modern design with timeless functionality.",
+    "price": 125.3,
+    "category_id": 2,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/2/23.jpg"
+  },
+  {
+    "id": 24,
+    "title": "Tables Product 9",
+    "description": "A tables that combines modern design with timeless functionality.",
+    "price": 126.4,
+    "category_id": 2,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/2/24.jpg"
+  },
+  {
+    "id": 25,
+    "title": "Tables Product 10",
+    "description": "A tables that combines modern design with timeless functionality.",
+    "price": 127.5,
+    "category_id": 2,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/2/25.jpg"
+  },
+  {
+    "id": 26,
+    "title": "Tables Product 11",
+    "description": "A tables that combines modern design with timeless functionality.",
+    "price": 128.6,
+    "category_id": 2,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/2/26.jpg"
+  },
+  {
+    "id": 27,
+    "title": "Tables Product 12",
+    "description": "A tables that combines modern design with timeless functionality.",
+    "price": 129.7,
+    "category_id": 2,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/2/27.jpg"
+  },
+  {
+    "id": 28,
+    "title": "Tables Product 13",
+    "description": "A tables that combines modern design with timeless functionality.",
+    "price": 130.8,
+    "category_id": 2,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/2/28.jpg"
+  },
+  {
+    "id": 29,
+    "title": "Tables Product 14",
+    "description": "A tables that combines modern design with timeless functionality.",
+    "price": 131.9,
+    "category_id": 2,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/2/29.jpg"
+  },
+  {
+    "id": 30,
+    "title": "Tables Product 15",
+    "description": "A tables that combines modern design with timeless functionality.",
+    "price": 133.0,
+    "category_id": 2,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/2/30.jpg"
+  },
+  {
+    "id": 31,
+    "title": "Cupboards Product 1",
+    "description": "A cupboards that combines modern design with timeless functionality.",
+    "price": 134.1,
+    "category_id": 3,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/3/31.jpg"
+  },
+  {
+    "id": 32,
+    "title": "Cupboards Product 2",
+    "description": "A cupboards that combines modern design with timeless functionality.",
+    "price": 135.2,
+    "category_id": 3,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/3/32.jpg"
+  },
+  {
+    "id": 33,
+    "title": "Cupboards Product 3",
+    "description": "A cupboards that combines modern design with timeless functionality.",
+    "price": 136.3,
+    "category_id": 3,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/3/33.jpg"
+  },
+  {
+    "id": 34,
+    "title": "Cupboards Product 4",
+    "description": "A cupboards that combines modern design with timeless functionality.",
+    "price": 137.4,
+    "category_id": 3,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/3/34.jpg"
+  },
+  {
+    "id": 35,
+    "title": "Cupboards Product 5",
+    "description": "A cupboards that combines modern design with timeless functionality.",
+    "price": 138.5,
+    "category_id": 3,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/3/35.jpg"
+  },
+  {
+    "id": 36,
+    "title": "Cupboards Product 6",
+    "description": "A cupboards that combines modern design with timeless functionality.",
+    "price": 139.6,
+    "category_id": 3,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/3/36.jpg"
+  },
+  {
+    "id": 37,
+    "title": "Cupboards Product 7",
+    "description": "A cupboards that combines modern design with timeless functionality.",
+    "price": 140.7,
+    "category_id": 3,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/3/37.jpg"
+  },
+  {
+    "id": 38,
+    "title": "Cupboards Product 8",
+    "description": "A cupboards that combines modern design with timeless functionality.",
+    "price": 141.8,
+    "category_id": 3,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/3/38.jpg"
+  },
+  {
+    "id": 39,
+    "title": "Cupboards Product 9",
+    "description": "A cupboards that combines modern design with timeless functionality.",
+    "price": 142.9,
+    "category_id": 3,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/3/39.jpg"
+  },
+  {
+    "id": 40,
+    "title": "Cupboards Product 10",
+    "description": "A cupboards that combines modern design with timeless functionality.",
+    "price": 144.0,
+    "category_id": 3,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/3/40.jpg"
+  },
+  {
+    "id": 41,
+    "title": "Cupboards Product 11",
+    "description": "A cupboards that combines modern design with timeless functionality.",
+    "price": 145.1,
+    "category_id": 3,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/3/41.jpg"
+  },
+  {
+    "id": 42,
+    "title": "Cupboards Product 12",
+    "description": "A cupboards that combines modern design with timeless functionality.",
+    "price": 146.2,
+    "category_id": 3,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/3/42.jpg"
+  },
+  {
+    "id": 43,
+    "title": "Cupboards Product 13",
+    "description": "A cupboards that combines modern design with timeless functionality.",
+    "price": 147.3,
+    "category_id": 3,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/3/43.jpg"
+  },
+  {
+    "id": 44,
+    "title": "Cupboards Product 14",
+    "description": "A cupboards that combines modern design with timeless functionality.",
+    "price": 148.4,
+    "category_id": 3,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/3/44.jpg"
+  },
+  {
+    "id": 45,
+    "title": "Cupboards Product 15",
+    "description": "A cupboards that combines modern design with timeless functionality.",
+    "price": 149.5,
+    "category_id": 3,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/3/45.jpg"
+  },
+  {
+    "id": 46,
+    "title": "Chairs Product 1",
+    "description": "A chairs that combines modern design with timeless functionality.",
+    "price": 150.6,
+    "category_id": 4,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/4/46.jpg"
+  },
+  {
+    "id": 47,
+    "title": "Chairs Product 2",
+    "description": "A chairs that combines modern design with timeless functionality.",
+    "price": 151.7,
+    "category_id": 4,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/4/47.jpg"
+  },
+  {
+    "id": 48,
+    "title": "Chairs Product 3",
+    "description": "A chairs that combines modern design with timeless functionality.",
+    "price": 152.8,
+    "category_id": 4,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/4/48.jpg"
+  },
+  {
+    "id": 49,
+    "title": "Chairs Product 4",
+    "description": "A chairs that combines modern design with timeless functionality.",
+    "price": 153.9,
+    "category_id": 4,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/4/49.jpg"
+  },
+  {
+    "id": 50,
+    "title": "Chairs Product 5",
+    "description": "A chairs that combines modern design with timeless functionality.",
+    "price": 155.0,
+    "category_id": 4,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/4/50.jpg"
+  },
+  {
+    "id": 51,
+    "title": "Chairs Product 6",
+    "description": "A chairs that combines modern design with timeless functionality.",
+    "price": 156.1,
+    "category_id": 4,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/4/51.jpg"
+  },
+  {
+    "id": 52,
+    "title": "Chairs Product 7",
+    "description": "A chairs that combines modern design with timeless functionality.",
+    "price": 157.2,
+    "category_id": 4,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/4/52.jpg"
+  },
+  {
+    "id": 53,
+    "title": "Chairs Product 8",
+    "description": "A chairs that combines modern design with timeless functionality.",
+    "price": 158.3,
+    "category_id": 4,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/4/53.jpg"
+  },
+  {
+    "id": 54,
+    "title": "Chairs Product 9",
+    "description": "A chairs that combines modern design with timeless functionality.",
+    "price": 159.4,
+    "category_id": 4,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/4/54.jpg"
+  },
+  {
+    "id": 55,
+    "title": "Chairs Product 10",
+    "description": "A chairs that combines modern design with timeless functionality.",
+    "price": 160.5,
+    "category_id": 4,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/4/55.jpg"
+  },
+  {
+    "id": 56,
+    "title": "Chairs Product 11",
+    "description": "A chairs that combines modern design with timeless functionality.",
+    "price": 161.6,
+    "category_id": 4,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/4/56.jpg"
+  },
+  {
+    "id": 57,
+    "title": "Chairs Product 12",
+    "description": "A chairs that combines modern design with timeless functionality.",
+    "price": 162.7,
+    "category_id": 4,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/4/57.jpg"
+  },
+  {
+    "id": 58,
+    "title": "Chairs Product 13",
+    "description": "A chairs that combines modern design with timeless functionality.",
+    "price": 163.8,
+    "category_id": 4,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/4/58.jpg"
+  },
+  {
+    "id": 59,
+    "title": "Chairs Product 14",
+    "description": "A chairs that combines modern design with timeless functionality.",
+    "price": 164.9,
+    "category_id": 4,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/4/59.jpg"
+  },
+  {
+    "id": 60,
+    "title": "Chairs Product 15",
+    "description": "A chairs that combines modern design with timeless functionality.",
+    "price": 166.0,
+    "category_id": 4,
+    "thumbnail": "https://cdn.dummyjson.com/product-images/4/60.jpg"
+  }
+]

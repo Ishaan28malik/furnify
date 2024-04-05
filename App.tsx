@@ -6,18 +6,20 @@
  */
 
 import React from 'react';
-import {
-  StyleSheet,
-} from 'react-native';
-
+import 'react-native-devsettings';
 import AppNavigator from './src/navigators/AppNavigator';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
+import {store, persistor} from './src/store/store';
 
-function App(): React.JSX.Element {
+function App() {
   return (
-    <AppNavigator />
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <AppNavigator />
+      </PersistGate>
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({});
 
 export default App;
