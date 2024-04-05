@@ -8,7 +8,7 @@ import { useRoute } from "@react-navigation/native"
 
 import { useAppDispatch } from "../hooks/useAppDispatch"
 import { useAppSelector } from "../hooks/useAppSelector"
-import { updateQuantity, addToCart } from "../store/slices/cartSlice"
+import { updateQuantity, addToCart, updateTotalPrice } from "../store/slices/cartSlice"
 import { useEffect } from "react"
 
 type productProps = {
@@ -32,6 +32,7 @@ const ProductDetail = ({ navigation }: productProps) => {
         let prd = findProduct();
         if(prd?.quantity) {
             dispatch(updateQuantity({productID: prd.id, quantity: prd.quantity + 1}));
+            dispatch(updateTotalPrice());
             console.log("find prd", findProduct);
         } else {
             updatePrd = {
@@ -40,6 +41,7 @@ const ProductDetail = ({ navigation }: productProps) => {
                 'totalPrice': product.price
             }
             dispatch(addToCart(updatePrd));
+            dispatch(updateTotalPrice());
         }
     }
 
@@ -52,11 +54,13 @@ const ProductDetail = ({ navigation }: productProps) => {
     const addQuantity = () => {
         let prd = findProduct();
         dispatch(updateQuantity({productID: prd.id, quantity: prd.quantity + 1}));
+        dispatch(updateTotalPrice());
     }
 
     const decreaseQuantity = () => {
         let prd = findProduct();
         dispatch(updateQuantity({productID: prd.id, quantity: prd.quantity - 1}));
+        dispatch(updateTotalPrice());
     }
 
     console.log("===items=====", items, findProduct());
