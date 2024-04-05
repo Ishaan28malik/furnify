@@ -1,11 +1,6 @@
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useState } from "react"
-import { Button, Image, ImageBackground, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { RootStackParamList } from "../../App";
-
-interface LoginProps {
-    navigation: NativeStackNavigationProp<RootStackParamList, 'HomePage'>;
-}
+import { Image, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const categoryData = [
     { title: 'Sofas', imageUrl: 'https://www.ikea.com/global/assets/range-categorisation/images/product/furniture-fu001.jpeg' },
@@ -14,31 +9,14 @@ const categoryData = [
     { title: 'Cupboards', imageUrl: 'https://www.ikea.com/in/en/images/products/baggebo-cabinet-with-door-white__1016757_pe830615_s5.jpg' },
 ];
 
-const HomePage = ({ navigation }: LoginProps) => {
-    // const [username, setUserName] = useState('');
-    // const handleLogin = () => {
-    //     if(username.length > 0) {
-    //         navigation.navigate('ConversationList');
-    //     }
-    // }
-
+const HomePage = ({}) => {
+    const navigation = useNavigation();
     const [query, setQuery] = useState('');
-
-
-
-    const image = { uri: 'https://cdn.dribbble.com/users/31812/screenshots/15790755/media/8513799800709dfb251784a525573446.png' };
 
     return (
         <ScrollView style={styles.container}>
             <Text style={styles.header}>Furnify</Text>
             <TextInput />
-            {/* 
-            <Searchbar
-                placeholder="Search"
-                onChangeText={onChangeSearch}
-                value={searchQuery}
-            />
-            */}
             <View >
                 <TextInput
                     style={styles.input}
@@ -100,7 +78,7 @@ const styles = StyleSheet.create({
     },
     footerImage: {
         width: '100%',
-        height: 150, // Adjust as needed
+        height: 150,
         marginTop: 20,
     },
     input: {
