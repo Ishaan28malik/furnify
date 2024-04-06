@@ -30,7 +30,7 @@ const productSlice = createSlice({
       state.loading = false;
       state.error = 'Failed to fetch product';
     },
-    requestProduct: state => {
+    requestProduct: (state, _: PayloadAction<number>) => {
       state.loading = true;
     },
     requestProductDetailSuccess: (

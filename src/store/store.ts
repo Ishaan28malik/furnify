@@ -28,11 +28,13 @@ const rootReducer = combineReducers({
   cart: cartSlice,
 });
 
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 const makeStore = () => {
   const sagaMiddleware = createSagaMiddleware();
   const store = configureStore({
-    reducer: persistReducer(persistConfig, rootReducer),
-    devTools: process.env.NODE_ENV !== 'production',
+    //ref: https://github.com/reduxjs/redux-toolkit/issues/1831#issuecomment-1007857548
+    reducer: persistedReducer,
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware({
         serializableCheck: {
@@ -40,6 +42,7 @@ const makeStore = () => {
         },
         thunk: false,
       }).concat(sagaMiddleware),
+    devTools: process.env.NODE_ENV !== 'production',
   });
   sagaMiddleware.run(rootSaga);
   return store;
@@ -50,5 +53,5 @@ const store = makeStore();
 const persistor = persistStore(store);
 export {persistor, store};
 
-export type RootState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

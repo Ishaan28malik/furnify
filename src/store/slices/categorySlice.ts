@@ -33,7 +33,8 @@ const categorySlice = createSlice({
       state.loading = false;
       state.error = 'Failed to fetch Category';
     },
-    requestCategory: state => {
+    // PayloadAction is requried to generate correct type.
+    requestCategory: (state, _: PayloadAction<number>) => {
       state.loading = true;
     },
     requestCategoryDetailSuccess: (
