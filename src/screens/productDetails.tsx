@@ -1,74 +1,61 @@
-
-
-
-
-import { Text, Image, View, StyleSheet, TouchableOpacity } from "react-native"
-import CustomButton from "../components/CustomButton"
-import { useRoute } from "@react-navigation/native"
-
-import { useAppDispatch } from "../hooks/useAppDispatch"
-import { useAppSelector } from "../hooks/useAppSelector"
-import { updateQuantity, addToCart, updateTotalPrice } from "../store/slices/cartSlice"
-import { useEffect } from "react"
+import React, { useEffect, useState } from "react";
+import { Text, Image, View, StyleSheet, TouchableOpacity, Pressable } from "react-native";
+import CustomButton from "../components/CustomButton";
+import { useRoute } from "@react-navigation/native";
+import { useAppDispatch } from "../hooks/useAppDispatch";
+import { useAppSelector } from "../hooks/useAppSelector";
+import { updateQuantity, addToCart, updateTotalPrice } from "../store/slices/cartSlice";
+import Footer from '../assets/images/footer.png';
 
 type productProps = {
     navigation: any
-} 
+};
 
 const ProductDetail = ({ navigation }: productProps) => {
-
     const dispatch = useAppDispatch();
-
     const { items } = useAppSelector(state => state.cart);
-
     const { params } = useRoute();
     const product = params?.product;
 
-    // const [cart, setCart] = useState([]);
-
     const onAddtoCart = () => {
-        console.log("onAddtoCart", product);
         let updatePrd;
         let prd = findProduct();
-        if(prd?.quantity) {
-            dispatch(updateQuantity({productID: prd.id, quantity: prd.quantity + 1}));
+        if (prd?.quantity) {
+            dispatch(updateQuantity({ productID: prd.id, quantity: prd.quantity + 1 }));
             dispatch(updateTotalPrice());
-            console.log("find prd", findProduct);
         } else {
             updatePrd = {
                 ...product,
                 'quantity': 1,
                 'totalPrice': product.price
-            }
+            };
             dispatch(addToCart(updatePrd));
             dispatch(updateTotalPrice());
         }
-    }
-
+    };
 
     const findProduct = () => {
-        let prd = items.find(prd => (prd.id === product.id))
-        return  prd ? prd : product
-    }
+        let prd = items.find(prd => (prd.id === product.id));
+        return prd ? prd : product;
+    };
 
     const addQuantity = () => {
         let prd = findProduct();
-        dispatch(updateQuantity({productID: prd.id, quantity: prd.quantity + 1}));
+        dispatch(updateQuantity({ productID: prd.id, quantity: prd.quantity + 1 }));
         dispatch(updateTotalPrice());
-    }
+    };
 
     const decreaseQuantity = () => {
         let prd = findProduct();
-        dispatch(updateQuantity({productID: prd.id, quantity: prd.quantity - 1}));
-        dispatch(updateTotalPrice());
-    }
+        if (prd.quantity > 0) {
+            dispatch(updateQuantity({ productID: prd.id, quantity: prd.quantity - 1 }));
+            dispatch(updateTotalPrice());
+        }
+    };
 
-    console.log("===items=====", items, findProduct());
-
-    return(
+    return (
         <View style={styles.container}>
             <View style={styles.prdImg}>
-                {/* <Text>product img</Text> */}
                 <Image style={styles.prdImg} source={{ uri: `${product?.thumbnail}` }} />
             </View>
             <View style={styles.prdDetails}>
@@ -79,12 +66,12 @@ const ProductDetail = ({ navigation }: productProps) => {
                     </View>
                     {findProduct()?.quantity &&
                         <View style={styles.cartInfo}>
-                            <TouchableOpacity onPress={addQuantity}>
-                                <Text>+</Text>
+                            <TouchableOpacity onPress={decreaseQuantity}>
+                                <Text style={styles.quantityStyle}>-</Text>
                             </TouchableOpacity>
                             <Text>{findProduct()?.quantity}</Text>
-                            <TouchableOpacity onPress={decreaseQuantity}>
-                                <Text>-</Text>
+                            <TouchableOpacity onPress={addQuantity}>
+                                <Text style={styles.quantityStyle}>+</Text>
                             </TouchableOpacity>
                         </View>
                     }
@@ -92,31 +79,38 @@ const ProductDetail = ({ navigation }: productProps) => {
                 <View>
                     <Text style={styles.descStyle}>{product.description}</Text>
                 </View>
+                <View style={styles.btnStyle}>
+                    <CustomButton title="Add to cart" backgroundColor="black" onPress={onAddtoCart} />
+                </View>
             </View>
-            <View style={styles.btnStyle}>
-                <CustomButton title="Add to cart" backgroundColor="black" onPress={onAddtoCart} />
-            </View>
+            <Pressable onPress={() => navigation.navigate('Cart' as never)} style={styles.footer}>
+                <Image source={Footer} style={styles.footerImage} />
+            </Pressable>
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        padding: 20,
-        gap: 20,
         backgroundColor: "#fff"
     },
     prdImg: {
-        backgroundColor: 'lightgray',
+        backgroundColor: 'white',
         height: 200,
-        width: 200
+        width: '100%',
     },
     prdDetails: {
         flex: 1,
         gap: 10,
-
+        borderWidth: 2,
+        borderColor: 'lightgrey',
+        borderBottomLeftRadius: 0,
+        borderBottomRightRadius: 0,
+        borderTopLeftRadius: 25,
+        borderTopRightRadius: 25,
+        padding: 20
     },
     prdInfo: {
         flexWrap: 'wrap',
@@ -127,21 +121,44 @@ const styles = StyleSheet.create({
         gap: 10
     },
     cartInfo: {
-        width: "50%"
+        flexDirection: 'row',
+        gap: 10,
+        alignItems: 'center'
     },
     text: {
-        fontSize: 16
+        fontSize: 18
     },
     priceStyle: {
         color: "#E29547",
-        fontWeight: '600'
+        fontWeight: '600',
+        fontSize: 20
     },
     btnStyle: {
-        justifyContent: 'flex-end'
+        marginTop: '40%'
     },
     descStyle: {
-        color: "#AAAAAA"
-    }
-})
+        color: "#AAAAAA",
+        fontWeight: '500',
+        fontSize: 16
+    },
+    quantityStyle: {
+        borderWidth: 1,
+        borderColor: '#E29547',
+        color: '#E29547',
+        width: 20,
+        height: 20,
+        borderRadius: 5,
+        textAlign: 'center'
+    },
+    footer: {
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
+    },
+    footerImage: {
+        width: '100%',
+        height: 30,
+    },
+});
 
 export default ProductDetail;

@@ -6,23 +6,22 @@ type itemProps = {
 }
 
 const ProductItem = ({ item }: itemProps) => {
-
     const navigation = useNavigation();
 
     const getProducts = (item) => {
-        // console.log("currect item", item)
-        navigation.navigate('Product', {'product': item});
+        navigation.navigate('Product', { 'product': item });
     }
 
-    // console.log("item new", item);
-    return(
+    return (
         <View>
             <TouchableOpacity style={styles.container} onPress={() => getProducts(item)}>
                 <View style={styles.imgContainer}>
-                    <Image style={styles.prdImg} source={{ uri: `${item.thumbnail}`}} />
+                    <Image style={styles.prdImg} source={{ uri: `${item.thumbnail}` }} />
                 </View>
-                <Text>{item.title}</Text>
-                <Text>₹{item.price}</Text>
+                <View style={{ alignItems: 'flex-start', gap: 12 }} >
+                    <Text style={{ fontSize: 12, fontWeight: '500', color: 'grey' }}>{item.title}</Text>
+                    <Text style={{ fontSize: 15, fontWeight: '800' }}>₹{item.price}</Text>
+                </View>
             </TouchableOpacity>
         </View>
     )
@@ -30,14 +29,11 @@ const ProductItem = ({ item }: itemProps) => {
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
-        backgroundColor: "#fff",
-        borderRadius: 5,
+        backgroundColor: "white",
+        borderRadius: 15,
         borderWidth: 1,
-        borderColor: "lightgray",
+        borderColor: "gray",
         padding: 20,
-        // width: 160,
-        // height: 150,
         gap: 20,
         alignItems: 'center',
     },

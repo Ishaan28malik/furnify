@@ -1,9 +1,11 @@
-import { useState } from "react"
-import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import React from "react";
+import { useState } from "react";
+import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import SearchInput from "../components/CustomSearch";
-import CustomButton from "../components/CustomButton";
 import { useAppSelector } from "../hooks/useAppSelector";
+import Footer from '../assets/images/footer.png';
+import Sale from '../assets/images/sale.png';
 
 export const categoryData = [
     { title: 'Sofas', imageUrl: 'https://www.ikea.com/global/assets/range-categorisation/images/product/furniture-fu001.jpeg' },
@@ -12,70 +14,56 @@ export const categoryData = [
     { title: 'Cupboards', imageUrl: 'https://www.ikea.com/in/en/images/products/baggebo-cabinet-with-door-white__1016757_pe830615_s5.jpg' },
 ];
 
-const HomePage = ({}) => {
-
+const HomePage = () => {
     const navigation = useNavigation();
     const [searchText, setSearch] = useState("");
 
-    const { categories } = useAppSelector(state => state.category);
-
-    // const getSearchData = (value: string) => {
-    //     console.log("search data", value)
-        
-    // }
-
-    const onSearch = () => {
-        navigation.navigate('Products', {searchQuery: searchText});
-    }
+    const { categories, categoryDetail } = useAppSelector(state => state.category);
 
     const onCartPage = () => {
         navigation.navigate('Cart' as never);
     }
 
     return (
-        <ScrollView style={styles.container}>
-             <Text style={styles.subHeader}>Explore What</Text>
-            <Text style={styles.subHeader}>Your Home Needs</Text>
-            <View>
-                <SearchInput updateSearch={(searchText) => setSearch(searchText)}/>
-                {searchText && <CustomButton title="Search" onPress={onSearch} backgroundColor="black" />}
-            </View>
-            <View>
-                <Text style={styles.categoryHeading}>Categories</Text>
-                <TouchableOpacity onPress={() => navigation.navigate('Category' as never)}>
-                    <Text>See all</Text>
-                </TouchableOpacity>
-            </View>
-            <ScrollView horizontal={true} style={styles.categoryList}>
-                {categories.map((category, index) => (
-                    <TouchableOpacity key={index} style={styles.categoryItem} onPress={() => navigation.navigate('Products' as never)}>
-                        <Image style={styles.categoryImage} source={{ uri: category.imageUrl }} />
-                        <Text>{category.title}</Text>
-                    </TouchableOpacity>
-                ))}
+        <View style={styles.container}>
+            <ScrollView style={styles.scrollView}>
+                <View style={{ marginBottom: 25 }}>
+                    <Text style={styles.subHeader}>Explore What</Text>
+                    <Text style={styles.subHeader}>Your Home Needs</Text>
+                </View>
+                <View>
+                    <SearchInput updateSearch={(searchText) => setSearch(searchText)} />
+                </View>
+                <View style={{ marginTop: 25, marginBottom: 25, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', alignContent: 'center' }}>
+                    <Text style={styles.categoryHeading}>Categories</Text>
+                    <Text onPress={() => navigation.navigate('Category' as never)} style={{ color: 'orange' }}>{"See all ->"}</Text>
+                </View>
+                <ScrollView horizontal={true} style={styles.categoryList}>
+                    {categories.map((category, index) => (
+                        <Pressable key={index} style={styles.categoryItem} onPress={() => navigation.navigate('Products' as never)}>
+                            <Text>{category.name}</Text>
+                            <Image style={styles.categoryImage} source={{ uri: category.imageUrl }} />
+                        </Pressable>
+                    ))}
+                </ScrollView>
+                <Image style={styles.saleImage} source={Sale} />
             </ScrollView>
-            <View>
-                <TouchableOpacity onPress={onCartPage}>
-                    <Text>Cart</Text>
-                </TouchableOpacity>
-            </View>
-            <Image
-                style={styles.footerImage}
-                source={{ uri: 'footer_image_url' }}
-                />
-        <Image
-            style={styles.footerImage}
-            source={{ uri: 'footer_image_url' }}
-        />
-    </ScrollView>
+            <Pressable onPress={onCartPage} style={styles.footer}>
+                <Image source={Footer} style={styles.footerImage} />
+            </Pressable>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: 'white',
+    },
+    scrollView: {
+        flex: 1,
         padding: 25,
-        backgroundColor: 'white'
+        marginTop: 65,
     },
     header: {
         fontSize: 24,
@@ -84,29 +72,29 @@ const styles = StyleSheet.create({
         marginVertical: 10,
     },
     subHeader: {
-        fontSize: 16,
+        fontSize: 20,
         fontWeight: 'bold',
     },
     categoryHeading: {
         fontSize: 20,
         fontWeight: 'bold',
-        marginTop: 20,
-        marginBottom: 10,
     },
     categoryList: {
         flexDirection: 'row',
+        padding: 20
     },
     categoryItem: {
         marginRight: 20,
         alignItems: 'center',
         display: 'flex',
         flexDirection: 'row',
-        borderWidth: 1,
+        borderWidth: 0.5,
         borderRadius: 20,
         paddingLeft: 15,
         paddingRight: 15,
         paddingTop: 10,
-        paddingBottom: 10
+        paddingBottom: 10,
+        borderColor: 'lightgrey',
     },
     categoryImage: {
         width: 50,
@@ -114,27 +102,20 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         marginLeft: 20
     },
+    saleImage: {
+        width: '100%',
+        height: 110,
+        marginTop: 50,
+    },
+    footer: {
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
+    },
     footerImage: {
         width: '100%',
-        height: 150, // Adjust as needed
-        marginTop: 20,
-    },
-    input: {
-        flex: 1,
-        paddingVertical: 8,
-        paddingHorizontal: 15,
-        backgroundColor: '#f2f2f2',
-        borderRadius: 5,
-        marginRight: 10,
-    },
-    button: {
-        backgroundColor: '#007bff',
-        padding: 10,
-        borderRadius: 5,
-    },
-    buttonText: {
-        color: '#fff',
+        height: 40,
     },
 });
 
-export default HomePage
+export default HomePage;
