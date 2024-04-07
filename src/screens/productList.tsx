@@ -1,35 +1,46 @@
 
 
 import { useEffect, useState } from "react";
-import { Text, Image, View, StyleSheet, ScrollView } from "react-native"
+import { Text, Image, View, StyleSheet, ScrollView, TouchableOpacity } from "react-native"
 
 import ProductItem from "./productItem";
-import List from "../components/CustomList";
 import { useAppSelector } from "../hooks/useAppSelector";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
-type productListProps = {
-    navigation: any
-} 
+const ProductList = () => {
 
-const ProductList = ({ navigation }: productListProps) => {
-
+    const navigation = useNavigation();
     const { categoryDetail } = useAppSelector(state => state.category);
     const { products } = useAppSelector(state => state.product)
     const { params } = useRoute();
     const searchQuery = params?.searchQuery || "";
 
     const [updatedPrds, setPrds] = useState(products);
-
-    // const [products, setProducts] = useState([]);
-    // const params = 
+    const [toggleFilter, setToggle] = useState(false);
+    const [filter, setFilter] = useState("ascending");
 
     useEffect(() => {
-      console.log("products", products);
-      let updatedPrds = products.filter((prd) => (prd.title.indexOf(searchQuery) >=0 ))
-      setPrds(updatedPrds)
+      let updatedPrdList = updatedPrds.filter((prd) => (
+        prd.category_id === categoryDetail?.id
+      ))
+      setPrds(updatedPrdList)
+    }, [categoryDetail])
+
+    useEffect(() => {
+      let updatedPrdList = updatedPrds.filter((prd) => (prd.title.indexOf(searchQuery) >=0))
+      updatedPrdList = updatedPrdList.sort((prd_a, prd_b) => prd_a.price - prd_b.price)
+      setPrds(updatedPrdList)
     }, [searchQuery])
-    console.log("=======categoryDetail", categoryDetail, searchQuery, updatedPrds);
+
+    const setFilterBy = (filterBy:string) => {
+      console.log("filterBy", filterBy);
+      setFilter(filterBy);
+      setToggle(!toggleFilter);
+      let updatedPrdList;
+      updatedPrdList = (filter === "ascending") ? updatedPrds.sort((prd_a, prd_b) => prd_b.price - prd_a.price) : 
+        updatedPrds.sort((prd_a, prd_b) => prd_a.price - prd_b.price);
+      setPrds(updatedPrdList)
+    }
 
     return(
         <View style={styles.container}>
@@ -37,7 +48,22 @@ const ProductList = ({ navigation }: productListProps) => {
               <View>
                 <Text style={styles.searchBy}>Search by: {searchQuery}</Text>
               </View> :
-              <Text>Category</Text>
+              <Text style={styles.categoryTitle}>Selected Category: {categoryDetail?.name}</Text>
+            }
+            <View>
+              <TouchableOpacity onPress={() => setToggle(!toggleFilter)}>
+                <Text style={styles.filterContent}>Filter</Text>
+              </TouchableOpacity>
+            </View>
+            {toggleFilter &&
+            <View style={styles.filterOption}>
+              <TouchableOpacity onPress={() => setFilterBy("ascending")}>
+                <Text style={filter === "ascending" && styles.activeFilter}>Sort by Price </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => setFilterBy("descending")}>
+                <Text style={filter === "descending" && styles.activeFilter}>Sort by Price </Text>
+              </TouchableOpacity>
+            </View>
             }
             <ScrollView>
               <View style={styles.productListWrapper}>
@@ -56,19 +82,41 @@ const ProductList = ({ navigation }: productListProps) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        padding: 10,
+        gap: 20
+    },
+    filterContent: {
+      position: 'relative'
     },
     searchBy: {
       backgroundColor: 'black',
       color: "#fff",
       padding: 10
     },
+    categoryTitle: {
+      fontSize: 16,
+      fontWeight: '500'
+    },
+    filterOption: {
+      zIndex: 3,
+      position: 'absolute',
+      top: 70,
+      width: 200,
+      backgroundColor: '#fff',
+      borderWidth: 1,
+      borderColor: 'lightgray',
+      padding: 10,
+      gap: 15
+    },
     productListWrapper: {
       // flex: 1,
       flexWrap: 'wrap',
       flexDirection: 'row',
       gap: 20,
-      padding: 10,
       justifyContent: 'center'
+    },
+    activeFilter: {
+      color: '#E29547'
     }
 })
 

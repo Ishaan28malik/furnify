@@ -18,7 +18,7 @@ const Category = () => {
     
     const navigation = useNavigation();
 
-    const { categories } = useAppSelector(state => state.category);
+    const { categories, categoryDetail } = useAppSelector(state => state.category);
     
     useEffect(() => {
         dispatch(requestCategories());
@@ -29,9 +29,11 @@ const Category = () => {
     const handleCategory = (category:CategoryType) => {
         navigation.navigate('Products' as never);
         console.log("category", category);
-        dispatch(requestCategory(category));
+        dispatch(requestCategory(category.id));
         dispatch(requestProducts());
     }
+
+    console.log("==category==", categoryDetail);
 
     return(
         <View>

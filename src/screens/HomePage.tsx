@@ -3,6 +3,7 @@ import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View 
 import { useNavigation } from "@react-navigation/native";
 import SearchInput from "../components/CustomSearch";
 import CustomButton from "../components/CustomButton";
+import { useAppSelector } from "../hooks/useAppSelector";
 
 export const categoryData = [
     { title: 'Sofas', imageUrl: 'https://www.ikea.com/global/assets/range-categorisation/images/product/furniture-fu001.jpeg' },
@@ -16,6 +17,8 @@ const HomePage = ({}) => {
     const navigation = useNavigation();
     const [searchText, setSearch] = useState("");
 
+    const { categories } = useAppSelector(state => state.category);
+
     // const getSearchData = (value: string) => {
     //     console.log("search data", value)
         
@@ -23,6 +26,10 @@ const HomePage = ({}) => {
 
     const onSearch = () => {
         navigation.navigate('Products', {searchQuery: searchText});
+    }
+
+    const onCartPage = () => {
+        navigation.navigate('Cart' as never);
     }
 
     return (
@@ -40,13 +47,18 @@ const HomePage = ({}) => {
                 </TouchableOpacity>
             </View>
             <ScrollView horizontal={true} style={styles.categoryList}>
-                {categoryData.map((category, index) => (
+                {categories.map((category, index) => (
                     <TouchableOpacity key={index} style={styles.categoryItem} onPress={() => navigation.navigate('Products' as never)}>
                         <Image style={styles.categoryImage} source={{ uri: category.imageUrl }} />
                         <Text>{category.title}</Text>
                     </TouchableOpacity>
                 ))}
             </ScrollView>
+            <View>
+                <TouchableOpacity onPress={onCartPage}>
+                    <Text>Cart</Text>
+                </TouchableOpacity>
+            </View>
             <Image
                 style={styles.footerImage}
                 source={{ uri: 'footer_image_url' }}
