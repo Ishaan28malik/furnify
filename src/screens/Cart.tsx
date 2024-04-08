@@ -64,6 +64,7 @@ const CartPage = () => {
                     );
                 })}
             </View>
+            {items.length > 0 ?
             <View style={styles.bottomStyle}>
                 <View>
                     <Text>Total</Text>
@@ -72,7 +73,9 @@ const CartPage = () => {
                 <View style={{ marginLeft: 'auto' }}>
                     <CustomButton title="Proceed to checkout" backgroundColor="#000" onPress={onPaymentPage} />
                 </View>
-            </View>
+            </View> :
+            <Text>Your cart is empty</Text>
+}
             <Pressable style={styles.footer} onPress={() => navigation.navigate('HomePage')}>
                 <Image source={Footer} style={styles.footerImage} />
             </Pressable>
