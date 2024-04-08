@@ -4,7 +4,7 @@ import CustomButton from "../components/CustomButton";
 import { useRoute } from "@react-navigation/native";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { useAppSelector } from "../hooks/useAppSelector";
-import { updateQuantity, addToCart, updateTotalPrice } from "../store/slices/cartSlice";
+import { updateQuantity, addToCart, updateTotalPrice, removeItemFromCart } from "../store/slices/cartSlice";
 import Footer from '../assets/images/footer.png';
 
 type productProps = {
@@ -47,7 +47,12 @@ const ProductDetail = ({ navigation }: productProps) => {
 
     const decreaseQuantity = () => {
         let prd = findProduct();
-        if (prd.quantity > 0) {
+        if(prd.quantity - 1 == 0){
+
+            dispatch(removeItemFromCart(prd.id));
+            dispatch(updateTotalPrice());
+        }
+        else if (prd.quantity > 0) {
             dispatch(updateQuantity({ productID: prd.id, quantity: prd.quantity - 1 }));
             dispatch(updateTotalPrice());
         }
