@@ -18,8 +18,14 @@ const CartPage = () => {
     };
 
     const decreaseQuantity = (prd) => {
-        dispatch(updateQuantity({ productID: prd.id, quantity: prd.quantity - 1 }));
-        dispatch(updateTotalPrice());
+        if(prd.quantity - 1 == 0) {
+            dispatch(removeItemFromCart(prd.id));
+            dispatch(updateTotalPrice());
+        }
+        else {
+            dispatch(updateQuantity({ productID: prd.id, quantity: prd.quantity - 1 }));
+            dispatch(updateTotalPrice());
+        }
     };
 
     const onDeleteCartItem = (prd) => {

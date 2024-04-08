@@ -20,14 +20,22 @@ const ProductList = () => {
     let updatedPrdList = updatedPrds.filter((prd) => (
       prd.category_id === categoryDetail?.id
     ));
+    // let newProdList = [...updatedPrdList];
+    if( searchQuery) {
+      let newProdList = updatedPrdList.filter((prd) => (prd.title.indexOf(searchQuery) >= 0));
+      updatedPrdList = newProdList.sort((prd_a, prd_b) => prd_a.price - prd_b.price);
+      setPrds(updatedPrdList);
+    }
     setPrds(updatedPrdList);
-  }, [categoryDetail]);
+    console.log(categoryDetail,searchQuery);
+  }, [categoryDetail,searchQuery]);
 
-  useEffect(() => {
-    let updatedPrdList = updatedPrds.filter((prd) => (prd.title.indexOf(searchQuery) >= 0));
-    updatedPrdList = updatedPrdList.sort((prd_a, prd_b) => prd_a.price - prd_b.price);
-    setPrds(updatedPrdList);
-  }, [searchQuery]);
+  // useEffect(() => {
+  //   let updatedPrdList = updatedPrds.filter((prd) => (prd.title.indexOf(searchQuery) >= 0));
+  //   updatedPrdList = updatedPrdList.sort((prd_a, prd_b) => prd_a.price - prd_b.price);
+  //   setPrds(updatedPrdList);
+  //   console.log('Search Filter');
+  // }, [searchQuery]);
 
   const setFilterBy = (filterBy: string) => {
     setFilter(filterBy);

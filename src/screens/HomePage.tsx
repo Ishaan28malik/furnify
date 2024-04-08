@@ -6,6 +6,8 @@ import SearchInput from "../components/CustomSearch";
 import { useAppSelector } from "../hooks/useAppSelector";
 import Footer from '../assets/images/footer.png';
 import Sale from '../assets/images/sale.png';
+import { useAppDispatch } from "../hooks/useAppDispatch";
+import { requestCategory } from "../store/slices/categorySlice";
 
 export const categoryData = [
     { title: 'Sofas', imageUrl: 'https://www.ikea.com/global/assets/range-categorisation/images/product/furniture-fu001.jpeg' },
@@ -17,11 +19,17 @@ export const categoryData = [
 const HomePage = () => {
     const navigation = useNavigation();
     const [searchText, setSearch] = useState("");
+    const dispatch = useAppDispatch();
 
     const { categories, categoryDetail } = useAppSelector(state => state.category);
 
     const onCartPage = () => {
         navigation.navigate('Cart' as never);
+    }
+
+    const showCategories = (categoryId: number) => {
+        dispatch(requestCategory(categoryId));
+        navigation.navigate('Products' as never)
     }
 
     return (
@@ -40,7 +48,7 @@ const HomePage = () => {
                 </View>
                 <ScrollView horizontal={true} style={styles.categoryList}>
                     {categories.map((category, index) => (
-                        <Pressable key={index} style={styles.categoryItem} onPress={() => navigation.navigate('Products' as never)}>
+                        <Pressable key={index} style={styles.categoryItem} onPress={()=>showCategories(category.id)}>
                             <Text>{category.name}</Text>
                             <Image style={styles.categoryImage} source={{ uri: category.imageUrl }} />
                         </Pressable>
