@@ -6,18 +6,19 @@ import { useNavigation } from "@react-navigation/native";
 import { updateQuantity, removeItemFromCart, updateTotalPrice } from "../store/slices/cartSlice";
 import CustomButton from "../components/CustomButton";
 import Footer from '../assets/images/footer.png'; // Import Footer image
+import { CartItemType } from "../api/shop";
 
 const CartPage = () => {
     const dispatch = useAppDispatch();
     const navigation = useNavigation();
     const { items, grandTotal } = useAppSelector(state => state.cart);
 
-    const addQuantity = (prd) => {
+    const addQuantity = (prd:CartItemType) => {
         dispatch(updateQuantity({ productID: prd.id, quantity: prd.quantity + 1 }));
         dispatch(updateTotalPrice());
     };
 
-    const decreaseQuantity = (prd) => {
+    const decreaseQuantity = (prd:CartItemType) => {
         if(prd.quantity - 1 == 0) {
             dispatch(removeItemFromCart(prd.id));
             dispatch(updateTotalPrice());
@@ -28,13 +29,13 @@ const CartPage = () => {
         }
     };
 
-    const onDeleteCartItem = (prd) => {
+    const onDeleteCartItem = (prd:CartItemType) => {
         dispatch(removeItemFromCart(prd.id));
         dispatch(updateTotalPrice());
     };
 
     const onPaymentPage = () => {
-        navigation.navigate('Payment');
+        navigation.navigate('Payment' as never);
     };
 
     return (
@@ -133,7 +134,6 @@ const styles = StyleSheet.create({
         color: '#E29547'
     },
     deleteIcon: {
-        color: '#E29547',
         borderWidth: 1,
         borderColor: '#E29547',
         color: '#E29547',

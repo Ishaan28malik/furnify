@@ -10,6 +10,16 @@ export type ProductType = {
   thumbnail: string;
 };
 
+export type CartItemType = {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  category_id: number;
+  thumbnail: string;
+  quantity: number
+}
+
 export type CategoryType = {
   id: number;
   name: string;
