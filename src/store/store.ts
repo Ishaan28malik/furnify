@@ -15,17 +15,19 @@ import rootSaga from './saga';
 import productSlice from './slices/productSlice';
 import categorySlice from './slices/categorySlice';
 import cartSlice from './slices/cartSlice';
+import ordersSlice from './slices/ordersSlice';
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whiteList: ['cart'],
+  whiteList: ['cart', 'orders'],
 };
 
 const rootReducer = combineReducers({
   product: productSlice,
   category: categorySlice,
   cart: cartSlice,
+  orders: ordersSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
