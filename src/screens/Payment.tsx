@@ -12,7 +12,7 @@ const PaymentForm: React.FC = () => {
     const navigation = useNavigation();
 
     const handlePayment = () => {
-        console.log('Processing payment with card details:', { cardNumber, cardHolderName, cvv });
+        // console.log('Processing payment with card details:', { cardNumber, cardHolderName, cvv });
         const cardNumberRegex = /^[0-9]{16}$/; // Regex to validate card number (assuming 16 digits)
         const cvvRegex = /^[0-9]{3,4}$/; // Regex to validate CVV (assuming 3 or 4 digits)
 

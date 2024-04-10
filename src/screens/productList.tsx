@@ -17,25 +17,32 @@ const ProductList = () => {
   const [filter, setFilter] = useState("ascending");
 
   useEffect(() => {
-    let updatedPrdList = updatedPrds.filter((prd) => (
-      prd.category_id === categoryDetail?.id
-    ));
-    // let newProdList = [...updatedPrdList];
-    if( searchQuery) {
-      let newProdList = updatedPrdList.filter((prd) => (prd.title.indexOf(searchQuery) >= 0));
-      updatedPrdList = newProdList.sort((prd_a, prd_b) => prd_a.price - prd_b.price);
-      setPrds(updatedPrdList);
-    }
-    setPrds(updatedPrdList);
-    console.log(categoryDetail,searchQuery);
-  }, [categoryDetail,searchQuery]);
+    let filteredProducts = products;
 
-  // useEffect(() => {
-  //   let updatedPrdList = updatedPrds.filter((prd) => (prd.title.indexOf(searchQuery) >= 0));
-  //   updatedPrdList = updatedPrdList.sort((prd_a, prd_b) => prd_a.price - prd_b.price);
-  //   setPrds(updatedPrdList);
-  //   console.log('Search Filter');
-  // }, [searchQuery]);
+    // Filter by category if categoryDetail is available
+    if (categoryDetail?.id) {
+      filteredProducts = filteredProducts.filter(prd => prd.category_id === categoryDetail.id);
+    }
+
+    // Further filter by searchQuery if it exists
+    if (searchQuery.trim() !== "") {
+      filteredProducts = products.filter(product =>
+        product.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setPrds(filteredProducts);
+    }
+
+    // Apply sorting based on the current filter state
+    filteredProducts.sort((prd_a, prd_b) => {
+      if (filter === "ascending") {
+        return prd_a.price - prd_b.price;
+      } else {
+        return prd_b.price - prd_a.price;
+      }
+    });
+
+    setPrds(filteredProducts);
+  }, [products, searchQuery, categoryDetail, filter]);
 
   const setFilterBy = (filterBy: string) => {
     setFilter(filterBy);
@@ -48,11 +55,11 @@ const ProductList = () => {
 
   return (
     <View style={styles.container}>
-      <View style={{paddingHorizontal: 25, paddingTop: 10}}>
+      <View style={{ paddingHorizontal: 25, paddingTop: 10 }}>
         <Text style={styles.subHeader}>Explore What</Text>
         <Text style={styles.subHeader}>Your Home Needs</Text>
       </View>
-      <View style={{paddingHorizontal: 25}}>
+      <View style={{ paddingHorizontal: 25 }}>
         <TouchableOpacity onPress={() => setToggle(!toggleFilter)} style={{ marginTop: 25, marginBottom: 25, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', alignContent: 'center' }}>
           {searchQuery ?
             <View>
@@ -73,7 +80,7 @@ const ProductList = () => {
           </TouchableOpacity>
         </View>
       }
-      <ScrollView style={{marginBottom: 50}}>
+      <ScrollView style={{ marginBottom: 50 }}>
         <View style={styles.productListWrapper}>
           {updatedPrds?.map((product, index) => {
             return (

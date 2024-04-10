@@ -16,7 +16,7 @@ type listProps = {
 }
 
 const List = ({ Item, data, navigation }: listProps) => {
-    console.log("====data=====", data)
+    // console.log("====data=====", data)
     return(
         <View style={styles.productListWrapper}>
             <FlatList 
